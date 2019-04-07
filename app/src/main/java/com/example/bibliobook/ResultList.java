@@ -30,7 +30,7 @@ public class ResultList extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private ArrayList<Livre> livreArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,12 @@ public class ResultList extends AppCompatActivity {
         //Log.e("JFL", "ici");
         //final TextView textCenter = (TextView) findViewById(R.id.textView3);
         String url = "https://www.googleapis.com/books/v1/volumes?q=" + searchedTerms;
+
+        recyclerView = (RecyclerView)findViewById(R.id.recycler);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -77,10 +83,23 @@ public class ResultList extends AppCompatActivity {
                                     JSONArray auteurArray = info.getJSONArray("authors");
                                     auteur = (String) auteurArray.get(0);
                                 }
+                                String genre = "No genre";
+                                if (info.has("categories")) {
+                                    JSONArray genreArray = info.getJSONArray("categories");
+                                    genre = (String)genreArray.get(0);
+                                }
+                                String date = "No publication date";
+                                if (info.has("publishedDate")){
+                                    date = info.getString("publishedDate");
+                                }
                                 JSONObject images = info.getJSONObject("imageLinks");
                                 String miniature = images.getString("thumbnail");
                                 deb.append(titre + " de " + auteur +"\n\n");
+                                Livre livreLoop = new Livre(titre,auteur,genre,date,miniature);
+                                livreArrayList.add(livreLoop);
                             }
+                            mAdapter = new LivreAdapter(livreArrayList);
+                            recyclerView.setAdapter(mAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             //textCenter.setText("JSON Parsing Failed");
