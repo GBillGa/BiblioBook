@@ -1,5 +1,6 @@
 package com.example.bibliobook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,24 +22,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
+import java.util.List;
 
 public class ResultList extends AppCompatActivity {
 
     private RequestQueue queue;
-    private RecyclerView mRecyclerView;
+    private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Livre> livreArrayList = new ArrayList<>();
-    private Semaphore s = new Semaphore(0);
+    private RecyclerView.LayoutManager layoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_list);
-
         queue = Volley.newRequestQueue(this);
         final TextView text = (TextView) findViewById(R.id.TopBarSearchText);
         String searchedTerms = getIntent().getStringExtra("SEARCHED");
@@ -55,41 +52,35 @@ public class ResultList extends AppCompatActivity {
             }
 
         });
+        //Log.e("JFL", "ici");
+        //final TextView textCenter = (TextView) findViewById(R.id.textView3);
         String url = "https://www.googleapis.com/books/v1/volumes?q=" + searchedTerms;
-        TextView deb = (TextView) findViewById(R.id.debugLog);
-
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
+          //              Log.e("JFL", "Reponse");
 
                         try {
                             JSONArray jsonArray = response.getJSONArray("items");
-                            //deb.setText("");
+                            TextView deb = (TextView) findViewById(R.id.debugLog);
+                            deb.setText("");
+            //                Log.e("JFL", "jsonArray:" + jsonArray);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject livre = jsonArray.getJSONObject(i);
                                 JSONObject info = livre.getJSONObject("volumeInfo");
                                 String titre = info.getString("title");
-                                JSONArray auteurArray = info.getJSONArray("authors");
-                                String auteur = (String)auteurArray.get(0);
-                                JSONArray genreArray = info.getJSONArray("categories");
-                                String genre = (String)genreArray.get(0);
+                                Log.i("JFL", "info:" + info);
+                                String auteur = "No author";
+                                if (info.has("authors")) {
+                                    JSONArray auteurArray = info.getJSONArray("authors");
+                                    auteur = (String) auteurArray.get(0);
+                                }
                                 JSONObject images = info.getJSONObject("imageLinks");
                                 String miniature = images.getString("thumbnail");
-                                String date = info.getString("publishedDate");
-                                //deb.append(titre + " de " + auteur +"\n\n");
-                                Livre livreLoop = new Livre(titre,auteur,genre,date,miniature);
-                                livreArrayList.add(livreLoop);
-                                //deb.append(titre + livreArrayList.size());
+                                deb.append(titre + " de " + auteur +"\n\n");
                             }
-                            mAdapter = new LivreAdapter(livreArrayList);
-                            mRecyclerView.setAdapter(mAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             //textCenter.setText("JSON Parsing Failed");
@@ -105,6 +96,7 @@ public class ResultList extends AppCompatActivity {
                     }
                 });
         queue.add(jsonObjectRequest);
+
     }
 
 

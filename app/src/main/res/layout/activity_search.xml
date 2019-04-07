@@ -27,14 +27,14 @@
 
     <ImageView
         android:id="@+id/searchIconImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="59dp"
+        android:layout_height="57dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:contentDescription="@string/imageSearchDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/loupe" />
+        app:srcCompat="@android:drawable/ic_search_category_default" />
 
     <ToggleButton
         android:id="@+id/toggleButton1"
