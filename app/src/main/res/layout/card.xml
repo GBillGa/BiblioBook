@@ -18,7 +18,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/logoColor"
         android:orientation="vertical">
 
         <!-- Les CardView agissent comme des FrameLayout,
@@ -27,13 +28,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="160dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/couverture"
                 android:layout_width="177dp"
-                android:layout_height="136dp"
+                android:layout_height="161dp"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/logo_bib" />
 
@@ -45,13 +46,14 @@
                 <TextView
                     android:id="@+id/titre"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="48dp"
                     android:background="?android:selectableItemBackground"
                     android:fontFamily="sans-serif"
                     android:padding="10dp"
                     android:textAlignment="center"
                     android:textColor="#333"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     tools:text="Titre" />
 
                 <TextView
