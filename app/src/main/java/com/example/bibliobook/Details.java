@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +29,7 @@ public class Details extends AppCompatActivity {
     private String idLExt = "";
     private String pageNumberExt = "No";
     private String descriptionExt = "";
+    private boolean liked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,5 +127,25 @@ public class Details extends AppCompatActivity {
                     }
                 });
         queue.add(jsonObjectRequest);
+        final ImageView heart= findViewById(R.id.like);
+        heart.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+                if (!liked){
+                    heart.setImageResource(R.drawable.like_red);
+                    liked = true;
+                    Toast.makeText(getApplicationContext(), "Added to favorites",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    heart.setImageResource(R.drawable.like_white);
+                    liked = false;
+                    Toast.makeText(getApplicationContext(), "Removed from favorites",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
     }
 }

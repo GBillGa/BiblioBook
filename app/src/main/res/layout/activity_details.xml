@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/TopBarSearchTextG"
-        android:layout_width="290dp"
+        android:layout_width="266dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -135,4 +135,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/couvertureG" />
+
+    <ImageView
+        android:id="@+id/like"
+        android:layout_width="51dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/like_white" />
 </android.support.constraint.ConstraintLayout>
