@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bibliobook">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -11,16 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultList"></activity>
-        <activity android:name=".Search" />
+        <activity
+            android:name=".Favorites"
+            android:label="@string/title_activity_favorites"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ResultList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Search"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Details" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="DISPLAY_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

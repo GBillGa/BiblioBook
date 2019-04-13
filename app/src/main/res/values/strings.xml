@@ -9,4 +9,5 @@
     <string name="humourToggleButton">Humour</string>
     <string name="drameToggleButton">Drame</string>
     <string name="topBarSearchText"></string>
+    <string name="title_activity_favorites">Favorites</string>
 </resources>

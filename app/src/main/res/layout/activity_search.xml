@@ -37,30 +37,86 @@
         app:srcCompat="@android:drawable/ic_search_category_default" />
 
     <ToggleButton
-        android:id="@+id/toggleButton1"
-        android:layout_width="wrap_content"
+        android:id="@+id/JFiction"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="132dp"
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="@string/humourToggleButton"
-        android:textOn="@string/humourToggleButton"
+        android:textOff="Juvenile Fiction"
+        android:textOn="Juvenile Fiction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
     <ToggleButton
-        android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
+        android:id="@+id/SScience"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="224dp"
+        android:background="@drawable/select_toggle_button"
+        android:stateListAnimator="@null"
+        android:textColor="@drawable/select_toggle_button"
+        android:textOff="Social Science"
+        android:textOn="Social Science"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+
+    <ToggleButton
+        android:id="@+id/Philo"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="308dp"
+        android:background="@drawable/select_toggle_button"
+        android:stateListAnimator="@null"
+        android:textColor="@drawable/select_toggle_button"
+        android:textOff="Philosophy"
+        android:textOn="Philosophy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+
+    <ToggleButton
+        android:id="@+id/Fiction"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="224dp"
+        android:background="@drawable/select_toggle_button"
+        android:stateListAnimator="@null"
+        android:textColor="@drawable/select_toggle_button"
+        android:textOff="Fiction"
+        android:textOn="Fiction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+
+    <ToggleButton
+        android:id="@+id/History"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="308dp"
+        android:background="@drawable/select_toggle_button"
+        android:stateListAnimator="@null"
+        android:textColor="@drawable/select_toggle_button"
+        android:textOff="History"
+        android:textOn="History"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+
+    <ToggleButton
+        android:id="@+id/Drama"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="132dp"
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="@string/drameToggleButton"
-        android:textOn="@string/drameToggleButton"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton1"
+        android:textOff="Drama"
+        android:textOn="Drama"
+        app:layout_constraintStart_toEndOf="@+id/JFiction"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 </android.support.constraint.ConstraintLayout>
