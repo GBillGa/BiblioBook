@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name"></string>
     <string name="HomeTitle">BiblioBook</string>
-    <string name="researchButton">Rechercher</string>
-    <string name="favButton">Favoris</string>
+    <string name="researchButton">Research</string>
+    <string name="favButton">Favorites</string>
     <string name="logoDescription">Logo</string>
     <string name="imageSearchDescription">Recherche</string>
-    <string name="placeholderSearch">Rechercher par titre ou auteur</string>
-    <string name="humourToggleButton">Humour</string>
-    <string name="drameToggleButton">Drame</string>
+    <string name="placeholderSearch">Reasearch by name or author</string>
+    <string name="historyToggleButton">History</string>
+    <string name="philosophyToggleButton">Philosophy</string>
+    <string name="fictionToggleButton">Fiction</string>
+    <string name="SSToggleButton">Social Science</string>
+    <string name="JFToggleButton">Juvenile Fiction</string>
+    <string name="dramaToggleButton">Drama</string>
     <string name="topBarSearchText"></string>
     <string name="title_activity_favorites">Favorites</string>
+    <string name="descCouverture">Image of the book</string>
+    <string name="descCoeur">Clickable heart to add to favorites</string>
+    <string name="descFleche">Clickable arrow to go back to the previous activity</string>
+    <string name="descBellNotif">Clickable bell to set up the notification</string>
 </resources>

@@ -11,30 +11,30 @@
         android:id="@+id/searchField"
         android:layout_width="259dp"
         android:layout_height="57dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/brown"
         android:ems="10"
         android:hint="@string/placeholderSearch"
         android:inputType="textPersonName"
         android:textAlignment="viewStart"
         android:textCursorDrawable="@drawable/color_cursor"
-        app:layout_constraintEnd_toStartOf="@+id/searchIconImage"
-        app:layout_constraintHorizontal_bias="0.596"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <ImageView
         android:id="@+id/searchIconImage"
         android:layout_width="59dp"
         android:layout_height="57dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="40dp"
         android:contentDescription="@string/imageSearchDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchField"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:srcCompat="@drawable/loupe" />
 
     <ToggleButton
         android:id="@+id/JFiction"
@@ -45,8 +45,8 @@
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="Juvenile Fiction"
-        android:textOn="Juvenile Fiction"
+        android:textOff="@string/JFToggleButton"
+        android:textOn="@string/JFToggleButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
@@ -59,8 +59,8 @@
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="Social Science"
-        android:textOn="Social Science"
+        android:textOff="@string/SSToggleButton"
+        android:textOn="@string/SSToggleButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
@@ -73,8 +73,8 @@
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="Philosophy"
-        android:textOn="Philosophy"
+        android:textOff="@string/philosophyToggleButton"
+        android:textOn="@string/philosophyToggleButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
@@ -82,41 +82,41 @@
         android:id="@+id/Fiction"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
         android:layout_marginTop="224dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="Fiction"
-        android:textOn="Fiction"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textOff="@string/fictionToggleButton"
+        android:textOn="@string/fictionToggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
     <ToggleButton
         android:id="@+id/History"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
         android:layout_marginTop="308dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="History"
-        android:textOn="History"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textOff="@string/historyToggleButton"
+        android:textOn="@string/historyToggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
     <ToggleButton
         android:id="@+id/Drama"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="132dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/select_toggle_button"
         android:stateListAnimator="@null"
         android:textColor="@drawable/select_toggle_button"
-        android:textOff="Drama"
-        android:textOn="Drama"
-        app:layout_constraintStart_toEndOf="@+id/JFiction"
+        android:textOff="@string/dramaToggleButton"
+        android:textOn="@string/dramaToggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
 </android.support.constraint.ConstraintLayout>

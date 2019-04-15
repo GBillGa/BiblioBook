@@ -1,5 +1,12 @@
 package com.example.bibliobook;
 
+/*
+
+    Object representing the information to display in a result list (title, author, type of book, year of publication and an url to the image)
+    It also contains getters and setters
+
+ */
+
 public class Livre {
     private String titre;
     private String auteur;
