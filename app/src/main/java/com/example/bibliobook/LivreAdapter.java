@@ -12,14 +12,19 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class LivreAdapter extends ArrayAdapter<Livre> {
+/*
 
-    //tweets est la liste des models à afficher
+    Here we have our Object Adapter that will be needed to inflate our ListView
+
+ */
+
+public class LivreAdapter extends ArrayAdapter<Livre> {
     public LivreAdapter(Context context, List<Livre> livres) {
         super(context, 0, livres);
     }
 
     public static Livre getItemC(List<Livre> livres,int position){
+        //We just return the wanted object
         return livres.get(position);
     }
 
@@ -33,23 +38,24 @@ public class LivreAdapter extends ArrayAdapter<Livre> {
         LivreViewHolder viewHolder = (LivreViewHolder) convertView.getTag();
         if(viewHolder == null){
             viewHolder = new LivreViewHolder();
-            viewHolder.titre = (TextView) convertView.findViewById(R.id.titre);
-            viewHolder.auteur = (TextView) convertView.findViewById(R.id.auteur);
-            viewHolder.genre = (TextView) convertView.findViewById(R.id.genre);
-            viewHolder.annee = (TextView) convertView.findViewById(R.id.annee);
-            viewHolder.couverture = (ImageView) convertView.findViewById(R.id.couverture);
+            viewHolder.titre = convertView.findViewById(R.id.titre);
+            viewHolder.auteur = convertView.findViewById(R.id.auteur);
+            viewHolder.genre = convertView.findViewById(R.id.genre);
+            viewHolder.annee = convertView.findViewById(R.id.annee);
+            viewHolder.couverture = convertView.findViewById(R.id.couverture);
             convertView.setTag(viewHolder);
         }
 
-        //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
+        //Here we just get the right object to pass data to our view
         Livre livre = getItem(position);
 
-        //il ne reste plus qu'à remplir notre vue
+        //Here we just have to fulfill our view
         viewHolder.titre.setText(livre.getTitre());
         viewHolder.annee.setText(livre.getAnnee());
         viewHolder.auteur.setText(livre.getAuteur());
         viewHolder.genre.setText(livre.getGenre());
         if (livre.getUrl() != null){
+            //We verify the existence of the URL otherwise Picasso will make the app stop
             Picasso.get().load(livre.getUrl()).into(viewHolder.couverture);
         }
 

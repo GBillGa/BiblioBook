@@ -71,16 +71,18 @@ public class Search extends AppCompatActivity {
         tList.add((ToggleButton)findViewById(R.id.Philo));
         tList.add((ToggleButton)findViewById(R.id.History));
 
-        //
+        //For each element of our toggle button list we have an onCheckChanged which will be called each time we click of a toggle button
         for (int i = 0; i < tList.size(); i ++){
            tList.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                    if(isChecked){
+                       //If we check the toggle button, we have to first unselect all then check him and change the extra "TAG"
                        unselectAll();
                        buttonView.setChecked(true);
                        intent.removeExtra("TAG");
                        intent.putExtra("TAG",buttonView.getResources().getResourceEntryName(buttonView.getId()));
                    } else {
+                       //If we want tu uncheck the toggle button we just call our function to uncheck everybody
                        unselectAll();
                    }
                }

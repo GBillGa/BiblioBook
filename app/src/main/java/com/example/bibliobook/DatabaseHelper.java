@@ -10,6 +10,7 @@ import android.util.Log;
 /*
 
         Database Helper to store the books in a SQLite local db
+        It stores the information that need to be displayed when we want to see our favorites Listview ( title , author , literary kind, publication adate and URL)
 
  */
 
@@ -43,7 +44,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Boolean addData(String titre, String auteur, String genre, String annee, String url, String gid){
-        SQLiteDatabase db = this.getWritableDatabase();     //Here we just add our passed data to the database
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Here we just add our passed data to the database
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2,titre);
         contentValues.put(COL3,auteur);
@@ -61,6 +64,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getData(){
+        //This function only return the whole database (used to inflate the Favorites ListView
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(query,null);
@@ -68,6 +72,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean exists(String id){
+        //This function is used to tell if a book is in the favorites database or not (to show the full red heart or the empty one in details activity)
         Cursor cursor = null;
         SQLiteDatabase db = this.getWritableDatabase();
         String sql ="SELECT * FROM book_table WHERE GID = '" + id + "'";
@@ -75,7 +80,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         cursor= db.rawQuery(sql,null);
         Log.d("ERROR","Cursor Count : " + cursor.getCount());
 
-        if(cursor.getCount()>0){
+        if(cursor.getCount()>0){ //Here we have element so the book is in the database
             cursor.close();
             return true;
         }else{
@@ -86,6 +91,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean deleteData(String name)
     {
+        //This function is used to remove a book from the favorites database
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, COL7 + " = '" + name + "'", null);
         if (result == -1){

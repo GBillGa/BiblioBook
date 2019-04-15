@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -24,6 +23,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/*
+
+    This class is used to display the results of the search
+    It's basically the same as Favorites just we use the extras to filter the search (extra represent the toggle button
+
+ */
+
 public class ResultList extends AppCompatActivity {
 
     private RequestQueue queue;
@@ -37,24 +43,24 @@ public class ResultList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_list);
         queue = Volley.newRequestQueue(this);
-        final TextView text = (TextView) findViewById(R.id.TopBarSearchText);
+
+        //We display the searched terms on the toolbar
+        final TextView text = findViewById(R.id.TopBarSearchText);
         String searchedTerms = getIntent().getStringExtra("SEARCHED");
         text.setText(searchedTerms);
-        ImageView imageview1 = findViewById(R.id.returnToSearchArrowG);
-        imageview1.setOnClickListener(new View.OnClickListener() {
+
+        //Return arrow finish the activity
+        ImageView arrow = findViewById(R.id.returnToSearchArrowG);
+        arrow.setOnClickListener(new View.OnClickListener() {
 
             @Override
-
             public void onClick(View v) {
-
                 finish();
-
             }
 
         });
-        //Log.e("JFL", "ici");
-        //final TextView textCenter = (TextView) findViewById(R.id.textView3);
 
+        //Here we perform our API Call
         HttpGetRequest getRequest = new HttpGetRequest();
         getRequest.execute("");
 
@@ -64,8 +70,11 @@ public class ResultList extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params){
 
+            //Firstly we get the values of the extras
             String searchedTerms = getIntent().getStringExtra("SEARCHED");
             String tag = getIntent().getStringExtra("TAG");
+
+            //Then we adapt the URL in depending of if a toggle button has been clicked
             String urlC = "https://www.googleapis.com/books/v1/volumes?q=" + searchedTerms.replaceAll(" ","%20");
             String post = "";
             switch (tag){
@@ -97,8 +106,9 @@ public class ResultList extends AppCompatActivity {
             if(!post.equals("")){
                 urlC = "https://www.googleapis.com/books/v1/volumes?q=" + searchedTerms.replaceAll(" ","%20") +"+subject:\"" + post + "\"";
             }
-            //Log.e("JFL", urlC + " | " + getIntent().getStringExtra("TAG"));
             mListView = findViewById(R.id.listView);
+
+            //API Call
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET, urlC, null, new Response.Listener<JSONObject>() {
 
@@ -107,13 +117,14 @@ public class ResultList extends AppCompatActivity {
 
 
                             try {
+                                //We just display the information that we juste received
                                 JSONArray jsonArray = response.getJSONArray("items");
-                                //Log.e("JFL", "jsonArray:" + jsonArray);
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject livre = jsonArray.getJSONObject(i);
                                     JSONObject info = livre.getJSONObject("volumeInfo");
                                     String titre = info.getString("title");
-                                    //Log.i("JFL", "info:" + info);
+
+                                    //For each that could be empty we verify if the returned JSON contain a value for those fields
                                     String auteur = "No author";
                                     if (info.has("authors")) {
                                         JSONArray auteurArray = info.getJSONArray("authors");
@@ -137,36 +148,36 @@ public class ResultList extends AppCompatActivity {
                                         JSONObject images = info.getJSONObject("imageLinks");
                                         miniature = images.getString("thumbnail");
                                     }
+
+                                    //And the nwe had it to our ArrayList of Livre
                                     Livre livreLoop = new Livre(titre,auteur,genre,date,miniature);
                                     livreArrayList.add(livreLoop);
                                     idLivre.add(idL);
                                 }
                                 LivreAdapter adapter = new LivreAdapter(ResultList.this, livreArrayList);
-                                Log.i("JFL", "taille:" + livreArrayList.size());
                                 mListView.setAdapter(adapter);
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Log.e("JFL","JSON Parsing Failed");
-                                //textCenter.setText("JSON Parsing Failed");
                             }
                         }
                     }, new Response.ErrorListener() {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // TODO: Handle error
-                            //textCenter.setText("Erreur lors de l'appel API");
                             error.printStackTrace();
                         }
                     });
             queue.add(jsonObjectRequest);
 
+            //Here we create event listener on each element of our listview to launch detail activity on click
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Livre item = LivreAdapter.getItemC(livreArrayList,position);
                     String titre = item.getTitre();
                     String idLivreClicked = idLivre.get(position);
+
+                    //We create extras to perform our API Call
                     Intent intent = new Intent(getBaseContext(), Details.class);
                     intent.putExtra("TITRE", titre);
                     intent.putExtra("ID", idLivreClicked);
