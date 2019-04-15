@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">BiblioBook</string>
     <string name="HomeTitle">BiblioBook</string>
     <string name="researchButton">Research</string>
     <string name="favButton">Favorites</string>
